@@ -1,0 +1,6 @@
+/* global vuetify styles */
+.v-field__input {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
