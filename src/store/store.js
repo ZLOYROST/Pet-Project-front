@@ -1,11 +1,13 @@
 import { createStore } from 'vuex'
 import axios from 'axios'
+import { ref } from 'vue';
+
 
 export const store = createStore({
     state () {
       return {
         news: [],
-        
+        isloading: false
       }
     },
 
@@ -13,11 +15,17 @@ export const store = createStore({
       saveNews (state, payload) {
         state.news = payload
       },
-
+      changeLoading(state, payload) {
+        state.isloading = payload
+      },
     },
-//  (state, payload) {
-//   state.newsPeople = payload
-// },
+
+    getters: {
+      Loading (state) {
+        return state.isloading
+      }
+    },
+
     actions: {
         getCSRF() {
             axios.get('http://127.0.0.1:8000/sanctum/csrf-cookie')
@@ -42,7 +50,6 @@ export const store = createStore({
                 console.log(error,'222')
               });
            
-        console.log(params,'gyi')
       },
       getPosts() {
         axios.get('http://127.0.0.1:8000/api/get-posts')
@@ -53,41 +60,21 @@ export const store = createStore({
           .catch(error => {
           });
     },
-    
-  //   createPost ({commit}, formdata) {
-  //     axios.post('http://127.0.0.1:8000/api/create-post', formdata, {
-  //       headers: {
-  //           "accept": "text/html",
-  //           // "Content-Type": "text/html; charset=UTF-8",
-  //           "Content-Type": "application/x-www-form-urlencoded"
-            
-  //       }
-  //     }) 
-  //     .then(response => {
-  //       console.log(formdata,'11111111111')
-  //       // store.commit('newsPeople', response.data.data)
-  //       console.log(response.formdata,'111')
-  //     })
-  //       .catch(error => {
-  //         console.log(error,'3333333')
-  //       });
-  // },
    
-  createPost({ commit }, formdata) {
-    fetch('http://127.0.0.1:8000/api/create-post', {
-      method: 'POST',
-      body: formdata,
-      headers: {
-        'Accept': 'application/json',
-        // 'Content-Type': 'text/html; charset=UTF-8',
-        'Content-Type': 'text/html; charset=UTF-8'
+ createPost ({commit}, formdata) {
+  store.commit('changeLoading', true)
+      axios.post('http://127.0.0.1:8000/api/create-post', formdata, {
+        headers: {
+          'Accept': 'application/json',
+          'Access-Control-Allow-Origin': '*',
       }
     })
     .then(data => {
+      store.commit('changeLoading', false)
       console.log(data, '111');
-      // store.commit('newsPeople', data.data);
     })
     .catch(data => {
+      store.commit('changeLoading', false)
       console.log(data, '3333333');
     });
   },
@@ -95,38 +82,9 @@ export const store = createStore({
     }
   })
   
-//   function postData() {
-//   let xhr = new XMLHttpRequest();
-//   xhr.open('POST', 'http://127.0.0.1:8000/api/create-post', true);
-//   xhr.setRequestHeader('Content-Type', 'text/html');
-//   xhr.onreadystatechange = function() {
-//     if (xhr.readyState === 4 && xhr.status === 200) {
-//       console.log(xhr.responseText);
-//     }
-//   };
-
-//   xhr.send(formData);
-//   console.log(xhr)
-// }
 
 
-  // -------------------------------------------
+ 
 
-  //   createPost ({commit}, formdata) {
-  //     axios.post('http://127.0.0.1:8000/api/create-post', formdata, {
-  //       headers: {
-  //           "accept": "text/html",
-  //           // "Content-Type": "text/html; charset=UTF-8",
-  //           "Content-Type": "application/x-www-form-urlencoded"
-            
-  //       }
-  //     }) 
-  //     .then(response => {
-  //       console.log(formdata,'11111111111')
-  //       // store.commit('newsPeople', response.data.data)
-  //       console.log(response.formdata,'111')
-  //     })
-  //       .catch(error => {
-  //         console.log(error,'3333333')
-  //       });
-  // },
+
+  

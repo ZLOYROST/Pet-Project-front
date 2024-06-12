@@ -1,5 +1,4 @@
  <script setup>
-// import MainPage from './components/MainPage.vue' 
 import PageHeader from './components/PageHeader.vue';
 import { onMounted } from 'vue'
 import { useStore } from 'vuex'
@@ -20,12 +19,18 @@ onMounted(() => {
     <v-app> 
       <PageHeader />
       <router-view />
-      
     
       <div class="footer">
         Footer
       </div>
     </v-app>
+    <v-progress-circular 
+      v-if="store.state.isloading"
+      color="primary"
+      indeterminate
+      :size="128"
+      class="loader"
+    />
   </div>
 </template>
 
@@ -57,4 +62,17 @@ onMounted(() => {
   margin-right: auto;
 }
 
+.loader {
+  width: 1920px;
+  height: 1080px;
+  
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: auto;
+    margin-left: -50px;
+    margin-top:-1110px;
+    
+}
 </style>
+<!-- v-if="store.state.isloading" -->

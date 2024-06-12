@@ -82,3 +82,10 @@ button:focus-visible {
   }
 }
 
+/* /////////////////// */
+
+.block1 {
+  width: 100px;
+  height: 100px;
+  color: #747bff;
+}

@@ -3,22 +3,10 @@ import { useStore } from 'vuex'
 import { reactive, ref } from 'vue'
 const store = useStore()
 
+
 const fileData = ref()
 const postData = reactive({ title: '', text: '', file: ''})
 
-// createPost ({commit}, formdata) {
-//   //     axios.post('http://127.0.0.1:8000/api/create-post', formdata, {
-//   //       headers: {
-//   //           "accept": "text/html",
-//   //           "Content-Type": "text/html; charset=UTF-8",
-            
-//   //       }
-//   //     }) 
-//   //     .then(response => {
-//   //       console.log(formdata,'11111111111')
-//   //       // store.commit('newsPeople', response.data.data)
-//   //       console.log(response.formdata,'111')
-//   //     })
 
 function createPost() {
   console.log('1233444')
@@ -26,30 +14,17 @@ function createPost() {
   formData.append('title', postData.title)
   formData.append('text', postData.text)
   formData.append('file', fileData.value)
-  formData.append('tags', ['kek'])
+  
   store.dispatch('createPost', formData )
   
   }
  
-  // let xhr = new XMLHttpRequest();
-  // xhr.open('POST', 'http://127.0.0.1:8000/api/create-post', true);
-  // xhr.setRequestHeader('Content-Type', 'text/html',);
-  // xhr.onreadystatechange = function() {
-  //   if (xhr.readyState === 4 && xhr.status === 200) {
-  //     console.log(xhr.responseText);
-  //   }
-  // };
-
-  // xhr.send(formData);
-  // console.log(xhr,'32145')
 
 </script>
 
 <template>
-  <!-- <div class="Main"> -->
   <v-container class="Main">
     <v-row>
-      <!-- <h4> В это поле вы можете написать свой заголовок</h4> -->
       <v-text-field
         v-model="postData.title"
         clearable
@@ -58,7 +33,6 @@ function createPost() {
       />
     </v-row>
     <v-row>
-      <!-- <h4> В это поле вы можете написать пост</h4> -->
       <v-textarea
         v-model="postData.text"
         label="Текст новости"
@@ -68,7 +42,7 @@ function createPost() {
     <v-row>
       <v-col>
         <v-file-input
-        v-model="fileData"
+          v-model="fileData"
           density="comfortable"
           show-size
           accept="image/*"
@@ -77,15 +51,7 @@ function createPost() {
           label="File input"
         />
       </v-col>
-      <v-col>
-        <!-- <button 
-          class="btnDownloadPicture"
-          @click="uploadFile"
-        >
-          
-          Загрузить файл
-        </button> -->
-      </v-col>
+      <v-col />
     </v-row>
   </v-container>
   <div class="BtnCreatePost">
@@ -99,12 +65,6 @@ function createPost() {
 </template>
 
 <style scoped>
-
-/* .Main{
-  max-width: 520px;
-  padding-left: 1rem;
-  padding-top: 5rem;
-} */
 
 .btnDownloadPicture {
   border: 1px solid #000;

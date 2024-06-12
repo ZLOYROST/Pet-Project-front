@@ -5,20 +5,16 @@ import { useRouter } from 'vue-router'
 
 const router = useRouter()
 
-
-
 const store = useStore()
 const registrationData = reactive({ userLogin: '', userEmail: '', userPassword: ''})
 
 
 function registration() {
   store.dispatch('registration',registrationData)
-
 }
+
 function openPageCreatePost() {
-
   router.push('/create-post')
-
 }
 
 

@@ -4,11 +4,7 @@ import { onMounted } from 'vue'
 
 const store = useStore()
 
-
-
-
 onMounted(() => {
-  
   store.dispatch('getPosts')
 })
 
@@ -34,12 +30,10 @@ onMounted(() => {
           </p>
         </div>
         <div class="picture">
-          <!-- <img :src="'http://127.0.0.1:8000/storage/images/' + post" class="pic"> -->
           <img
             :src="'http://127.0.0.1:8000/storage/' + post.image"
             class="pic"
           >
-          <!-- <img :src='http://127.0.0.1:8000/storage/`${post.image}`'> -->
         </div>
       </div>
     </div>
